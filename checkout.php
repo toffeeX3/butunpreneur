@@ -47,7 +47,7 @@ if(isset($_POST['submit'])){
          $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
          $delete_cart->execute([$user_id]);
 
-         $message[] = 'order placed successfully!';
+         $_SESSION['message'] = 'Order success. <br> Your order is being made!';
          header('location: orders.php');
          exit;
       }
@@ -105,7 +105,7 @@ if(isset($_POST['submit'])){
                $total_products = implode($cart_items);
                $grand_total += ($fetch_cart['price'] * $fetch_cart['quantity']);
       ?>
-      <p><span class="name"><?= $fetch_cart['name']; ?></span><span class="price">$<?= $fetch_cart['price']; ?> x <?= $fetch_cart['quantity']; ?></span></p>
+      <p><span class="name"><?= $fetch_cart['name']; ?></span><spa   n class="price">$<?= $fetch_cart['price']; ?> x <?= $fetch_cart['quantity']; ?></spa></p>
       <?php
             }
          }else{
@@ -113,7 +113,7 @@ if(isset($_POST['submit'])){
          }
          
       ?>
-      <p class="grand-total"><span class="name">grand total :</span><span class="price">$<?= $grand_total; ?></span></p>
+      <p class="grand-total"><span class="name">Grand total :</span><span class="price">$<?= $grand_total; ?></span></p>
       <a href="cart.php" class="btn">view cart</a>
    </div>
 

@@ -4,6 +4,14 @@ include 'components/connect.php';
 
 session_start();
 
+if (isset($_SESSION['message'])) {
+   echo '<div class="message-box" id="message-box">';
+   echo $_SESSION['message']; 
+   echo '<button id="close-message">Close</button>';
+   echo '</div>';
+   unset($_SESSION['message']);
+}
+
 if(isset($_SESSION['user_id'])){
    $user_id = $_SESSION['user_id'];
 }else{

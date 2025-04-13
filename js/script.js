@@ -1,31 +1,32 @@
-// Navbar and profile toggle functions
+
 const navbar = document.querySelector('.header .flex .navbar');
 const profile = document.querySelector('.header .flex .profile');
 const search = document.querySelector('.header .flex .search');
 
-// Toggle menu
 document.querySelector('#menu-btn').onclick = () => {
    navbar.classList.toggle('active');
    profile.classList.remove('active');
    search.classList.remove('active');
 }
 
-// Toggle profile
+// profil 
 document.querySelector('#user-btn').onclick = () => {
    profile.classList.toggle('active');
+   search.classList.remove('active');
    navbar.classList.remove('active');
 }
 
-// Scroll function to close menus
+// close saat scrool
 window.onscroll = () => {
    navbar.classList.remove('active');
    profile.classList.remove('active');
    search.classList.remove('active');
 }
 
-// Toggle search bar
+// search
 document.querySelector('#search-btn').onclick = () => {
    search.classList.toggle('active');
+   profile.classList.remove('active');
    navbar.classList.remove('active');
 }
 
@@ -120,39 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
    });
 });
 
-
-
-document.addEventListener("DOMContentLoaded", () => {
-   const loginForm = document.querySelector('#login-form');
-
-   if (loginForm) {
-      loginForm.addEventListener('submit', function (e) {
-         e.preventDefault();  // Prevent normal form submission
-
-         const formData = new FormData(loginForm);
-
-         fetch('ajax_login.php', {  // Send data to ajax_login.php
-            method: 'POST',
-            body: formData
-         })
-         .then(res => res.json())  // Handle JSON response from server
-         .then(data => {
-            if (data.success) {
-               window.location.href = 'home.php';  // Redirect if login is successful
-            } else {
-               showMessage(data.message || 'Login failed.');  // Display error message
-            }
-         })
-         .catch(() => {
-            showMessage('Something went wrong!');
-         });
-      });
-   }
-});
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
+   // ambil id
    const messageBox = document.getElementById('message-box');
    const closeButton = document.getElementById('close-message');
 
@@ -161,10 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
          messageBox.style.opacity = '0';
          setTimeout(() => {
             messageBox.remove();
-         }, 300); // matches CSS transition
+         }, 300); 
       });
 
-      // Optional: auto-hide after 4 seconds
       setTimeout(() => {
          if (messageBox) {
             messageBox.style.opacity = '0';
@@ -181,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
    document.querySelectorAll('.cart-action-form, .delete-all-form').forEach(form => {
       let clickedButton = null;
 
-      // Track the last clicked submit button
+      // ngambil button yg terakhir di klik
       form.querySelectorAll('button[type="submit"]').forEach(button => {
          button.addEventListener('click', function () {
             clickedButton = this;
@@ -193,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
          const formData = new FormData(form);
 
-         // Add the clicked button's name and value manually
+         // nambah value yg tadi
          if (clickedButton && clickedButton.name) {
             formData.append(clickedButton.name, clickedButton.value || '1');
          }
@@ -206,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
          .then(data => {
             if (data.message) {
                showMessage(data.message);
-               setTimeout(() => location.reload(), 700); // Optional
+               setTimeout(() => location.reload(), 700);
             }
          })
          .catch(err => {
@@ -214,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showMessage('Something went wrong!');
          });
 
-         clickedButton = null; // Reset
+         clickedButton = null;
       });
    });
 });

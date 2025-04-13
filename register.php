@@ -11,20 +11,22 @@ if (isset($_SESSION['user_id'])) {
     $user_id = '';
 };
 
+// jika submit di tekan, if ini berlangsung
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $email = $_POST['email'];
-    $email = filter_var($email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $number = $_POST['number'];
     $number = filter_var($number, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     
-    // Hashing the password using password_hash
+    // hashhh
     $pass = $_POST['pass'];
     $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $cpass = $_POST['cpass'];
     $cpass = filter_var($cpass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
+    //ngambil email dn number user
     $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ? OR number = ?");
     $select_user->execute([$email, $number]);
     $row = $select_user->fetch(PDO::FETCH_ASSOC);
@@ -35,7 +37,6 @@ if (isset($_POST['submit'])) {
         if ($pass != $cpass) {
             $message[] = 'Password not matched!';
         } else {
-            // Hash password before storing it
             $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
             $insert_user = $conn->prepare("INSERT INTO `users`(name, email, number, password) VALUES(?,?,?,?)");
             $insert_user->execute([$name, $email, $number, $hashed_pass]);

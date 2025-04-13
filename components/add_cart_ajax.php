@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
    $response['message'] = 'Please log in to add items!';
    echo json_encode($response);
    exit;
-}
+}  
 
 $user_id = $_SESSION['user_id'];
 $pid = $_POST['pid'] ?? '';
