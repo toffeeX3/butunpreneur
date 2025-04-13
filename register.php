@@ -33,7 +33,6 @@ if (isset($_POST['submit'])) {
         $message[] = 'Email or number already exists!';
     } else {
         if ($pass != $cpass) {
-            $message[] = 'Confirm password not matched!';
             $message[] = 'Password not matched!';
         } else {
             // Hash password before storing it
