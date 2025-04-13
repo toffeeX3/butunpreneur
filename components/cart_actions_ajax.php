@@ -35,4 +35,4 @@ if (isset($_POST['update_qty'])) {
     exit;
 }
 
-echo json_encode(['message' => 'Invalid action']);
+echo json_encode($response);

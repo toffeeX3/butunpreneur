@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
     } else {
         if ($pass != $cpass) {
             $message[] = 'Confirm password not matched!';
+            $message[] = 'Password not matched!';
         } else {
             // Hash password before storing it
             $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
