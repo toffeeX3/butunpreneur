@@ -1,12 +1,12 @@
 <?php
 include 'components/connect.php';
 
+// nyimpen user
 session_start();
 
-// Initialize the message array
 $message = []; 
 
-// Check if user is logged in
+// cek user
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
@@ -19,11 +19,12 @@ if (isset($_POST['submit'])) {
     $pass = $_POST['pass'];
     $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    // Select user by email
+    // menganbil email user di database
     $select_user = $conn->prepare("SELECT * FROM `users` WHERE email = ?");
     $select_user->execute([$email]);
     $row = $select_user->fetch(PDO::FETCH_ASSOC);
 
+    // verifikasi , jika email tidak terlihat row akn 0
     if ($row && password_verify($pass, $row['password'])) { 
         $_SESSION['user_id'] = $row['id'];
 
@@ -55,7 +56,8 @@ if (isset($_POST['submit'])) {
     <form action="" method="post">
         <h3>Login Now</h3>
 
-        <!-- Display the messages if there are any -->
+        <!-- show da msg -->
+         <!-- krn msg array, bakal ngasi tau make foreach -->
         <?php 
         if (!empty($message)) {
             foreach ($message as $msg) {
