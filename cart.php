@@ -11,31 +11,6 @@ if(isset($_SESSION['user_id'])){
    header('location:home.php');
 };
 
-// if(isset($_POST['delete'])){
-//    $cart_id = $_POST['cart_id'];
-//    $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE id = ?");
-//    $delete_cart_item->execute([$cart_id]);
-//    $message[] = 'Cart item deleted';
-// }
-
-// if(isset($_POST['delete_all'])){
-//    $delete_cart_item = $conn->prepare("DELETE FROM `cart` WHERE user_id = ?");
-//    $delete_cart_item->execute([$user_id]);
-//    // header('location:cart.php');
-//    $message[] = 'Deleted all from cart';
-
-// }
-
-// if(isset($_POST['update_qty'])){
-//    $cart_id = $_POST['cart_id'];
-//    $qty = $_POST['qty'];
-//    $qty = filter_var($qty, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-//    $update_qty = $conn->prepare("UPDATE `cart` SET quantity = ? WHERE id = ?");
-//    $update_qty->execute([$qty, $cart_id]);
-//    $message[] = 'Cart quantity updated';
-
-// }
-
 $grand_total = 0;
 
 ?>
@@ -50,6 +25,9 @@ $grand_total = 0;
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <link rel="shortcut icon" type="x-icon" href="images/MAINLOGO.png" />
+
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">

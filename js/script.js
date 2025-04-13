@@ -37,38 +37,12 @@ function fadeOut() {
    setInterval(loader, 1000);
 }
 
-// window.onload = function() {
-//    // Handle message box fade-out
-//    const messageBox = document.getElementById('message-box');
-//    const closeButton = document.getElementById('close-message');
-
-//    // If messageBox exists, start fade-out and auto-hide after 2 seconds
-//    if (messageBox) {
-//        // Auto-fade out after 2 seconds
-//        setTimeout(function() {
-//            messageBox.style.opacity = '0'; 
-//            setTimeout(function() {
-//                messageBox.style.display = 'none'; 
-//            }, 1000);
-//        }, 5000); 
-       
-//        if (closeButton) {
-//            closeButton.addEventListener('click', function() {
-//                messageBox.style.opacity = '0';
-//                setTimeout(function() {
-//                    messageBox.style.display = 'none';
-//                }, 200);
-//            });
-//        }
-//    }
-// }
 
 function showMessage(text) {
-   // Remove old message if it's there
+   // remove
    const existing = document.getElementById('message-box');
    if (existing) existing.remove();
 
-   // Create new message box
    const box = document.createElement('div');
    box.id = 'message-box';
    box.className = 'message-box';
@@ -78,15 +52,15 @@ function showMessage(text) {
    `;
    document.body.appendChild(box);
 
-   // Auto-fade after 5 seconds
+   // set timeout untuk close box atomatis
    setTimeout(() => {
       box.style.opacity = '0';
       setTimeout(() => {
          box.style.display = 'none';
       }, 1000);
-   }, 5000);
+   }, 5000); // detik
 
-   // Close button
+   // ngambil dr button id 
    const closeButton = document.getElementById('close-message');
    if (closeButton) {
       closeButton.addEventListener('click', () => {
@@ -98,6 +72,7 @@ function showMessage(text) {
    }
 }
 
+//for add to cart
 document.addEventListener("DOMContentLoaded", function () {
    document.querySelectorAll('.add-to-cart-form').forEach(form => {
       form.addEventListener('submit', function(e) {
@@ -120,8 +95,8 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 });
 
+// for cart
 document.addEventListener('DOMContentLoaded', () => {
-   // Handle all cart form submissions with fetch
    document.querySelectorAll('.cart-action-form, .delete-all-form').forEach(form => {
       form.addEventListener('submit', function(e) {
          e.preventDefault();
@@ -135,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
          .then(res => res.json())
          .then(data => {
             if (data.message) {
-               showMessage(data.message); // ✅ your existing function!
+               showMessage(data.message);
             }
          })
          .catch(err => {
@@ -144,6 +119,36 @@ document.addEventListener('DOMContentLoaded', () => {
       });
    });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+   const loginForm = document.querySelector('#login-form');
+
+   if (loginForm) {
+      loginForm.addEventListener('submit', function (e) {
+         e.preventDefault();  // Prevent normal form submission
+
+         const formData = new FormData(loginForm);
+
+         fetch('ajax_login.php', {  // Send data to ajax_login.php
+            method: 'POST',
+            body: formData
+         })
+         .then(res => res.json())  // Handle JSON response from server
+         .then(data => {
+            if (data.success) {
+               window.location.href = 'home.php';  // Redirect if login is successful
+            } else {
+               showMessage(data.message || 'Login failed.');  // Display error message
+            }
+         })
+         .catch(() => {
+            showMessage('Something went wrong!');
+         });
+      });
+   }
+});
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
    const messageBox = document.getElementById('message-box');
