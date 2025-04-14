@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
    if($check_cart->rowCount() > 0){
 
       if($address == ''){
-         $message[] = 'please add your address!';
+         $message[] = 'Please add your address!';
       }else{
          
          $insert_order = $conn->prepare("INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price) VALUES(?,?,?,?,?,?,?,?)");
@@ -53,7 +53,7 @@ if(isset($_POST['submit'])){
       }
       
    }else{
-      $message[] = 'your cart is empty';
+      $message[] = 'Your cart is empty';
    }
 
 }
@@ -136,6 +136,7 @@ if(isset($_POST['submit'])){
       <select name="method" class="box" required>
          <option value="" disabled selected>Select payment method --</option>
          <option value="cash on delivery">Cash on delivery</option>
+         <option value="others">Others</option>
       </select>
       <input type="submit" value="place order" class="btn <?php if($fetch_profile['address'] == ''){echo 'disabled';}?>" style="width:100%; background:var(--red); color:var(--white);" name="submit">
    </div>

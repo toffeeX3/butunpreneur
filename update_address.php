@@ -20,19 +20,19 @@ if(isset($_SESSION['user_id'])){
    exit;
 }
 
-// Track navigation history (store last 3 pages to be safe)
+
+//track buat msg
 if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = [];
 }
 
-// Store the previous page explicitly
+// nyimpen
 if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== end($_SESSION['history'])) {
     $_SESSION['history'][] = $_SERVER['HTTP_REFERER'];
 }
 
-// Keep only last 3 visited pages to avoid bloating session
 if (count($_SESSION['history']) > 3) {
-    array_shift($_SESSION['history']); // Remove oldest entry
+    array_shift($_SESSION['history']); 
 }
 
 if(isset($_POST['submit'])){

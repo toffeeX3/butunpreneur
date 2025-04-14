@@ -11,7 +11,6 @@ if (isset($_SESSION['user_id'])) {
     $user_id = '';
 };
 
-// jika submit di tekan, if ini berlangsung
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $name = filter_var($name, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -19,8 +18,6 @@ if (isset($_POST['submit'])) {
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $number = $_POST['number'];
     $number = filter_var($number, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    
-    // hashhh
     $pass = $_POST['pass'];
     $pass = filter_var($pass, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $cpass = $_POST['cpass'];
@@ -85,7 +82,7 @@ if (isset($_POST['submit'])) {
         ?>
         
       <input type="text" name="name" required placeholder="Enter your name" class="box" maxlength="50">
-      <input type="email" name="email" required placeholder="Enter your email" class="box" maxlength="50" oninput="this.value = this.value.replace(/\s/g, '')">
+      <input type="email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$" required placeholder="Enter your email" class="box" maxlength="50" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="number" name="number" required placeholder="Enter your number" class="box" min="0" max="9999999999" maxlength="10">
       <input type="password" name="pass" required placeholder="Enter your password" class="box" maxlength="50" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" name="cpass" required placeholder="Confirm your password" class="box" maxlength="50" oninput="this.value = this.value.replace(/\s/g, '')">

@@ -9,9 +9,9 @@
             <p>Follow us on.</p>
 
             <div class="footer-socials">
-            <a href="#"><img src="images/facebook.svg" alt="Facebook"></a>
-            <a href="#"><img src="images/twitter.svg" alt="Twitter"></a>
-            <a href="#"><img src="images/instagram.svg" alt="Instagram"></a>
+            <a href="https://web.facebook.com/profile.php?id=61575112234855" target="_blank"><img src="images/facebook.svg" alt="Facebook"></a>
+            <a href="https://x.com/butunpreneur"><img src="images/twitter.svg" target="_blank" alt="Twitter"></a>
+            <a href="https://www.instagram.com/butunpreneur/" target="_blank"><img src="images/instagram.svg" alt="Instagram"></a>
             </div>
         </div>
         <!-- <div class="footer-links">

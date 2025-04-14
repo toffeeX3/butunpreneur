@@ -59,7 +59,7 @@ $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
                <p><span>Number : </span><span style="color: grey;"><?= $fetch_profile['number']; ?></span></p>
                <p><span>Email : </span><span style="color: grey;"><?= $fetch_profile['email']; ?></span></p>
                <p class="address"><i class="fas fa-map-marker-alt"></i><span style="color: grey;">
-                  <?php if($fetch_profile['address'] == ''){echo 'please enter your address';}else{echo $fetch_profile['address'];} ?>
+                  <?php if($fetch_profile['address'] == ''){echo 'Please enter your address';}else{echo $fetch_profile['address'];} ?>
                </span></p>
 
                <div class="buttons">

@@ -18,12 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Host       = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;
         $mail->Username   = 'butunpreneur@gmail.com'; 
-        $mail->Password   = 'jccr zsaz kirg wgdd';    // your Gmail App Password
+        $mail->Password   = 'jccr zsaz kirg wgdd';    
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
         $mail->setFrom('butunpreneur@gmail.com', 'Website Contact Form');
-        $mail->addAddress('butunprenuer@email.com'); // destination
+        $mail->addAddress('butunprenuer@email.com'); 
 
         $mail->isHTML(true);
         $mail->Subject = 'New message from website contact form';

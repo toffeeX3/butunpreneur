@@ -92,28 +92,31 @@ if(isset($_POST['submit'])){
    }
    
    $empty_pass = '';
+   // ambil ols pas
    $select_prev_pass = $conn->prepare("SELECT password FROM users WHERE id = ?");
    $select_prev_pass->execute([$user_id]);
    $fetch_prev_pass = $select_prev_pass->fetch(PDO::FETCH_ASSOC);
    $prev_pass = $fetch_prev_pass['password'];
+   //mek sure
    $old_pass = filter_var($_POST['old_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $new_pass = filter_var($_POST['new_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
    $confirm_pass = filter_var($_POST['confirm_pass'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-   if($old_pass != $empty_pass){
-      if($old_pass != $prev_pass){
-         $success = false;
-         $_SESSION['message'] = 'Old password not matched!';
-         header('Location: update_profile.php');
-         exit;
+   if ($old_pass != $empty_pass) {
+      if (!password_verify($old_pass, $prev_pass)) {
+          $success = false;
+          $_SESSION['message'] = 'Old password not matched!';
+          header('Location: update_profile.php');
+          exit;
       }elseif($new_pass != $confirm_pass){
          $success = false;
          $_SESSION['message'] = 'Confirm password not matched!';
          header('Location: update_profile.php');
          exit;
       }else{
+         $hashed_new_pass = password_hash($new_pass, PASSWORD_DEFAULT);
          $update_pass = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
-         if(!$update_pass->execute([$confirm_pass, $user_id])){
+         if(!$update_pass->execute([$hashed_new_pass, $user_id])){
             $success = false;
             $_SESSION['message'] = 'Failed to update password!';
             header('Location: update_profile.php');
@@ -126,6 +129,7 @@ if(isset($_POST['submit'])){
       }
    }
 
+   //// WAWAWAWAWAAWAWAAWA
    if (isset($_FILES['uploaded_img']) && $_FILES['uploaded_img']['error'] == 0) {
       $target_dir = "uploaded_img/";
       $file_name = basename($_FILES["uploaded_img"]["name"]);
@@ -137,7 +141,6 @@ if(isset($_POST['submit'])){
          if ($_FILES["uploaded_img"]["size"] <= 5000000) {
             if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
                if (move_uploaded_file($_FILES["uploaded_img"]["tmp_name"], $target_path)) {
-                  // 🔥 ONLY store filename
                   $update_image = $conn->prepare("UPDATE users SET image = ? WHERE id = ?");
                   if ($update_image->execute([$file_name, $user_id])) {
                      $_SESSION['message'] = 'Profile picture updated successfully!';
